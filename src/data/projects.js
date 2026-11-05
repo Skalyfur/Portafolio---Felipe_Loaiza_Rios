@@ -15,12 +15,12 @@ export const projects = [
 
     // Galería
     images: [
-      "/images/galery-images/ferrosSys/Captura_de_pantalla1.png",
-      "/images/galery-images/ferrosSys/Captura_de_pantalla2.png",
-      "/images/galery-images/ferrosSys/Captura_de_pantalla3.png",
-      "/images/galery-images/ferrosSys/Captura_de_pantalla4.png",
-      "/images/galery-images/ferrosSys/Captura_de_pantalla5.png"
-    ]
+      `${BASE_URL}images/galery-images/ferrosSys/Captura_de_pantalla1.png`,
+      `${BASE_URL}images/galery-images/ferrosSys/Captura_de_pantalla2.png`,
+      `${BASE_URL}images/galery-images/ferrosSys/Captura_de_pantalla3.png`,
+      `${BASE_URL}images/galery-images/ferrosSys/Captura_de_pantalla4.png`,
+      `${BASE_URL}images/galery-images/ferrosSys/Captura_de_pantalla5.png`,
+    ],
   },
 
   {
@@ -43,8 +43,8 @@ export const projects = [
       "/images/galery-images/sentinelia/2.jpeg",
       "/images/galery-images/sentinelia/3.jpeg",
       "/images/galery-images/sentinelia/4.jpeg",
-      "/images/galery-images/sentinelia/5.jpeg"
-    ]
+      "/images/galery-images/sentinelia/5.jpeg",
+    ],
   },
 
   {
@@ -67,15 +67,16 @@ export const projects = [
       "/images/galery-images/passwordGenerator/Captura_de_pantalla2.png",
       "/images/galery-images/passwordGenerator/Captura_de_pantalla3.png",
       "/images/galery-images/passwordGenerator/Captura_de_pantalla4.png",
-      "/images/galery-images/passwordGenerator/Captura_de_pantalla5.png"
-    ]
+      "/images/galery-images/passwordGenerator/Captura_de_pantalla5.png",
+    ],
   },
 
   {
     id: "motoCare",
     category: "Web",
     icon: "Smartphone",
-    title: "MotoCare - App de mantenimiento de motocicletas - Proximo lanzamiento",
+    title:
+      "MotoCare - App de mantenimiento de motocicletas - Proximo lanzamiento",
     description:
       "Manage your motorcycle maintenance, receive alerts, and keep track of your bike in an easy, modern way.",
     tags: ["React", "Vite", "Tailwind", "Framer Motion"],
@@ -91,15 +92,16 @@ export const projects = [
       "/images/galery-images/portfolio/Captura_de_pantalla2.png",
       "/images/galery-images/portfolio/Captura_de_pantalla3.png",
       "/images/galery-images/portfolio/Captura_de_pantalla4.png",
-      "/images/galery-images/portfolio/Captura_de_pantalla5.png"
-    ]
+      "/images/galery-images/portfolio/Captura_de_pantalla5.png",
+    ],
   },
 
   {
     id: "Obsydria",
     category: "Other",
     icon: "Shield",
-    title: "Obsydria - Gestion y monitoreo de infrastructura ti - Proximo lanzamiento",
+    title:
+      "Obsydria - Gestion y monitoreo de infrastructura ti - Proximo lanzamiento",
     description:
       "Personal project to document my learning in cybersecurity and penetration testing. Built with Django and a modern frontend.",
     tags: ["Django", "React", "Tailwind"],
@@ -115,8 +117,8 @@ export const projects = [
       "/images/galery-images/pentesting/Captura_de_pantalla2.png",
       "/images/galery-images/pentesting/Captura_de_pantalla3.png",
       "/images/galery-images/pentesting/Captura_de_pantalla4.png",
-      "/images/galery-images/pentesting/Captura_de_pantalla5.png"
-    ]
+      "/images/galery-images/pentesting/Captura_de_pantalla5.png",
+    ],
   },
 
   {
@@ -139,7 +141,7 @@ export const projects = [
       "/images/galery-images/skyCocktail/Captura_de_pantalla2.png",
       "/images/galery-images/skyCocktail/Captura_de_pantalla3.png",
       "/images/galery-images/skyCocktail/Captura_de_pantalla4.png",
-      "/images/galery-images/skyCocktail/Captura_de_pantalla5.png"
-    ]
-  }
+      "/images/galery-images/skyCocktail/Captura_de_pantalla5.png",
+    ],
+  },
 ];
