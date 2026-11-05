@@ -1,0 +1,563 @@
+/* ==========================================================================
+   1. VARIABLES (DARK POR DEFECTO / LIGHT CON body.lightmode)
+   ========================================================================== */
+:root {
+  color-scheme: dark;
+
+  --bg-card: rgba(13, 18, 30, 0.7);
+  --bg-card-hover: rgba(20, 27, 45, 0.85);
+  --bg-item-subtle: rgba(255, 255, 255, 0.03);
+  --border-card: rgba(255, 255, 255, 0.08);
+  --border-card-hover: rgba(168, 85, 247, 0.4);
+
+  --text-primary: #ffffff;
+  --text-body: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+
+  --accent-purple: #a855f7;
+  --accent-cyan: #38bdf8;
+  --glow-purple: rgba(168, 85, 247, 0.28);
+  --glow-cyan: rgba(56, 189, 248, 0.12);
+
+  --shadow-card: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+  --shadow-item-hover: none;
+  --intro-text-shadow: 0 1px 12px rgba(5, 5, 15, 0.65);
+
+  --transition-base: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                     color 0.25s ease,
+                     background-color 0.25s ease,
+                     border-color 0.25s ease,
+                     box-shadow 0.25s ease;
+}
+
+body.lightmode {
+  color-scheme: light;
+
+  /* Superficies: tarjeta blanca sobre fondo gris claro, con borde visible */
+  --bg-card: rgba(255, 255, 255, 0.92);
+  --bg-card-hover: #ffffff;
+  --bg-item-subtle: #f4f6fb;
+  --border-card: rgba(15, 23, 42, 0.12);
+  --border-card-hover: rgba(126, 34, 206, 0.45);
+
+  /* Texto: contraste AA sobre blanco */
+  --text-primary: #0b1220;
+  --text-body: #1e293b;
+  --text-muted: #475569;
+  --text-dim: #5b6b80;
+
+  /* Acentos más oscuros para que se lean sobre fondo claro */
+  --accent-purple: #7e22ce;
+  --accent-cyan: #0369a1;
+  --glow-purple: rgba(126, 34, 206, 0.16);
+  --glow-cyan: rgba(3, 105, 161, 0.1);
+
+  --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.06),
+                 0 12px 32px -8px rgba(15, 23, 42, 0.12);
+  --shadow-item-hover: 0 6px 18px -6px rgba(15, 23, 42, 0.18);
+  --intro-text-shadow: none;
+}
+
+/* Foco visible para teclado */
+.skillBadge:focus-visible,
+.highlightItem:focus-visible {
+  outline: 2px solid var(--accent-purple);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   2. LAYOUT
+   ========================================================================== */
+.aboutSection {
+  width: min(1425px, calc(100% - 80px));
+  margin: 0 auto;
+  padding: 40px 0;
+  color: var(--text-body);
+}
+
+.aboutContainer {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+/* ==========================================================================
+   3. TARJETAS BASE
+   ========================================================================== */
+.aboutCard {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 20px;
+  padding: 28px;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.aboutCard:hover {
+  border-color: var(--border-card-hover);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  color: var(--text-dim);
+}
+
+.cardHeader h2 {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.headerIcon {
+  color: var(--accent-cyan);
+}
+
+/* Estilo compartido de los "items" internos (antes repetido 5 veces) */
+.highlightItem,
+.timelineContent,
+.educationItem,
+.languageRow,
+.skillBadge {
+  background: var(--bg-item-subtle);
+  border: 1px solid var(--border-card);
+  transition: var(--transition-base);
+}
+
+.highlightItem:hover,
+.timelineContent:hover,
+.educationItem:hover,
+.languageRow:hover,
+.skillBadge:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-card-hover);
+  box-shadow: var(--shadow-item-hover);
+}
+
+/* ==========================================================================
+   4. COLUMNA IZQUIERDA (INTRO)
+   ========================================================================== */
+.mainIntroCard {
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Capas: fondo (0) → contenido (1) */
+.introContent,
+.highlightsGrid {
+  position: relative;
+  z-index: 1;
+}
+
+.introContent {
+  text-shadow: var(--intro-text-shadow);
+}
+
+/* Canvas de partículas */
+.introParticles {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+  opacity: 0.9;
+}
+
+body.lightmode .introParticles {
+  opacity: 0.55;
+}
+
+/* Planeta: "translate" y "scale" son independientes, así el hover
+   ya no queda anulado por la animación (antes ambos usaban transform). */
+.introPlanet {
+  position: absolute;
+  right: -210px;
+  top: 50%;
+  translate: 0 -70%;
+  height: 95%;
+  max-height: 520px;
+  width: auto;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 25px var(--glow-purple));
+  transition: scale 0.4s ease, filter 0.4s ease;
+  animation: floatPlanet 6s ease-in-out infinite;
+}
+
+body.lightmode .introPlanet {
+  opacity: 0.55;
+}
+
+.mainIntroCard:hover .introPlanet {
+  scale: 1.08;
+  filter: drop-shadow(0 0 35px var(--glow-purple));
+}
+
+@keyframes floatPlanet {
+  0%, 100% { translate: 0 -70%; }
+  50%      { translate: 0 -64%; }
+}
+
+/* Resplandor ambiental (unifica .planetGlow y el ::after anterior) */
+.planetGlow,
+.mainIntroCard::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    circle,
+    var(--glow-purple) 0%,
+    var(--glow-cyan) 50%,
+    transparent 75%
+  );
+}
+
+.planetGlow {
+  top: 40%;
+  right: -170px;
+  width: 360px;
+  height: 360px;
+  translate: 0 -70%;
+  opacity: 0.7;
+  filter: blur(45px);
+}
+
+/* Luz superior derecha: más grande, muy difuminada y de baja intensidad,
+   así se funde con el fondo sin formar un círculo marcado. */
+.mainIntroCard::after {
+  top: -180px;
+  right: -160px;
+  width: 460px;
+  height: 460px;
+  opacity: 0.45;
+  filter: blur(70px);
+}
+
+body.lightmode .mainIntroCard::after {
+  opacity: 0.3;
+}
+
+.sectionBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--accent-cyan);
+}
+
+.badgeLine {
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background-color: var(--accent-cyan);
+}
+
+.introTitle {
+  margin-bottom: 24px;
+  font-size: clamp(36px, 4.5vw, 52px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.gradientText {
+  background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-cyan) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.introDescription {
+  max-width: 420px;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+/* --- Highlights: ocupan TODO el espacio restante, sin huecos ---
+   flex:1 hace que la grilla crezca hasta el final de la tarjeta y
+   grid-auto-rows:1fr reparte esa altura entre las filas, de modo que
+   las tarjetas se estiran en vez de dejar un vacío bajo la descripción. */
+.highlightsGrid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 1fr;
+  gap: 16px;
+}
+
+.highlightItem {
+  display: flex;
+  flex-direction: column;    /* icono arriba, texto abajo */
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 22px 18px;
+  border-radius: 14px;
+  text-align: center;
+}
+
+.highlightItem:hover {
+  transform: translateY(-3px);
+}
+
+.highlightIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  color: var(--accent-purple);
+  background: var(--glow-purple);
+}
+
+.highlightTitle {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-primary);
+}
+
+.highlightDesc {
+  margin-top: 4px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   5. COLUMNA DERECHA
+   ========================================================================== */
+.aboutRightColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.aboutBottomGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Línea de tiempo */
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-left: 10px;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: 13px;
+  width: 1px;
+  background: var(--border-card);
+}
+
+.timelineItem {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.timelineDot {
+  z-index: 1;
+  width: 8px;
+  height: 8px;
+  margin-top: 6px;
+  border-radius: 50%;
+  background: var(--accent-purple);
+  box-shadow: 0 0 0 4px var(--glow-purple);
+}
+
+.timelineContent {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 10px;
+}
+
+.timelineHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.itemTitle {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.itemPeriod {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent-purple);
+}
+
+.itemDesc {
+  margin-top: 4px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+/* Educación */
+.educationItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 10px 12px;
+  border-radius: 10px;
+}
+
+/* Skills */
+.skillsBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skillBadge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-body);
+  cursor: pointer;
+}
+
+.skillBadge:hover {
+  border-color: var(--accent-purple);
+  color: var(--accent-purple);
+  transform: translateY(-2px);
+}
+
+/* Idiomas */
+.languagesList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.languageRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.langInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.flagIcon {
+  font-size: 16px;
+}
+
+.langName {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.langLevel {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   6. RESPONSIVE
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .introPlanet {
+    right: -200px;
+    opacity: 0.7;
+  }
+}
+
+@media (max-width: 960px) {
+  .aboutContainer {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .introPlanet {
+    display: none;
+  }
+
+  .introTitle {
+    font-size: 38px;
+  }
+
+  .highlightsGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 580px) {
+  .aboutSection {
+    width: calc(100% - 24px);
+    padding: 20px 0;
+  }
+
+  .aboutBottomGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .introTitle {
+    font-size: 34px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .introPlanet {
+    animation: none;
+  }
+
+  .introParticles {
+    opacity: 0.65;
+  }
+
+  .highlightItem:hover,
+  .skillBadge:hover {
+    transform: none;
+  }
+}

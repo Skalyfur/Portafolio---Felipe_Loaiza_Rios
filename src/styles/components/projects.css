@@ -1,0 +1,39 @@
+/* Tarjeta de Proyecto */
+body.lightmode .projectCard {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+  box-shadow: var(--card-shadow);
+}
+
+body.lightmode .projectCard:hover {
+  border-color: var(--border-hover);
+}
+
+body.lightmode .cardTitle {
+  color: var(--text-primary);
+}
+
+body.lightmode .cardDescription {
+  color: var(--text-secondary);
+}
+
+body.lightmode .tagBadge {
+  background: var(--bg-badge);
+  border-color: var(--border-color);
+  color: var(--text-secondary);
+}
+
+body.lightmode .filterContainer {
+  background: rgba(226, 232, 240, 0.6);
+}
+
+body.lightmode .filterBtn {
+  color: var(--text-secondary);
+  border-color: var(--border-color);
+}
+
+body.lightmode .filterBtn.active {
+  background: rgba(147, 51, 234, 0.1);
+  color: var(--accent-purple);
+  border-color: var(--accent-purple);
+}

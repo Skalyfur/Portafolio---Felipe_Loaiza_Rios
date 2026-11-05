@@ -1,0 +1,620 @@
+/* ==========================================================================
+   1. VARIABLES (DARK POR DEFECTO / LIGHT CON body.lightmode)
+   ========================================================================== */
+:root {
+  color-scheme: dark;
+
+  --bg-main: #0b0f19;
+  --bg-page-glow:
+    radial-gradient(900px 500px at 100% 0%, rgba(168, 85, 247, 0.06), transparent 60%),
+    radial-gradient(700px 400px at 0% 100%, rgba(49, 213, 255, 0.04), transparent 60%);
+  --bg-card: rgba(12, 17, 27, 0.85);
+  --bg-card-hover: rgba(18, 25, 38, 0.95);
+  --bg-item-subtle: rgba(255, 255, 255, 0.03);
+  --border-card: rgba(91, 108, 143, 0.28);
+  --border-card-hover: rgba(168, 85, 247, 0.4);
+
+  --text-main: #f4f6ff;
+  --text-muted: #97a4bd;
+  --text-dim: #71809d;
+
+  --accent-purple: #a855f7;
+  --accent-cyan: #31d5ff;
+  --glow-purple: rgba(168, 85, 247, 0.25);
+  --card-tint: rgba(125, 92, 255, 0.05);
+
+  --icon-purple-bg: rgba(168, 85, 247, 0.12);
+  --icon-purple-border: rgba(168, 85, 247, 0.2);
+  --icon-cyan-bg: rgba(49, 213, 255, 0.1);
+  --icon-cyan-border: rgba(49, 213, 255, 0.2);
+
+  --shadow-rest: none;
+  --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.3);
+  --shadow-button: 0 6px 20px var(--glow-purple);
+
+  --radius-card: 16px;
+  --transition-base: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                     color 0.25s ease,
+                     background-color 0.25s ease,
+                     border-color 0.25s ease,
+                     box-shadow 0.25s ease;
+}
+
+body.lightmode {
+  color-scheme: light;
+
+  /* Fondo de página ligeramente azulado: las tarjetas blancas se despegan de él */
+  --bg-main: #eceff6;
+  --bg-page-glow:
+    radial-gradient(900px 500px at 100% 0%, rgba(126, 34, 206, 0.09), transparent 60%),
+    radial-gradient(700px 400px at 0% 100%, rgba(3, 105, 161, 0.07), transparent 60%);
+  --bg-card: rgba(255, 255, 255, 0.94);
+  --bg-card-hover: #ffffff;
+  --bg-item-subtle: #f3f5fa;
+  --border-card: rgba(15, 23, 42, 0.12);
+  --border-card-hover: rgba(126, 34, 206, 0.45);
+
+  /* Texto con contraste AA sobre blanco */
+  --text-main: #0b1220;
+  --text-muted: #475569;
+  --text-dim: #5b6b80;
+
+  --accent-purple: #7e22ce;
+  --accent-cyan: #0369a1;
+  --glow-purple: rgba(126, 34, 206, 0.18);
+  --card-tint: rgba(126, 34, 206, 0.05);
+
+  --icon-purple-bg: rgba(126, 34, 206, 0.09);
+  --icon-purple-border: rgba(126, 34, 206, 0.22);
+  --icon-cyan-bg: rgba(3, 105, 161, 0.09);
+  --icon-cyan-border: rgba(3, 105, 161, 0.22);
+
+  /* En claro las tarjetas necesitan sombra en reposo para tener profundidad */
+  --shadow-rest: 0 1px 2px rgba(15, 23, 42, 0.06),
+                 0 10px 28px -10px rgba(15, 23, 42, 0.12);
+  --shadow-card: 0 2px 4px rgba(15, 23, 42, 0.06),
+                 0 18px 40px -12px rgba(15, 23, 42, 0.2);
+  --shadow-button: 0 8px 22px -6px rgba(126, 34, 206, 0.35);
+}
+
+body {
+  background-color: var(--bg-main);
+  background-image: var(--bg-page-glow);
+  background-attachment: fixed;
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.home {
+  width: min(1425px, calc(100% - 80px));
+  margin: 0 auto;
+  padding: 24px 0 48px;
+}
+
+/* ==========================================================================
+   2. GRIDS
+   ========================================================================== */
+.home-top-grid {
+  display: grid;
+  grid-template-columns: 1.65fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.home-bottom-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr 1.05fr;
+  gap: 24px;
+}
+
+/* ==========================================================================
+   3. TARJETAS Y HERO
+   ========================================================================== */
+.hero-card,
+.hero-image-card,
+.home-card {
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle at 85% 15%, var(--card-tint), transparent 35%),
+              var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-rest);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.hero-card:hover,
+.hero-image-card:hover,
+.home-card:hover {
+  border-color: var(--border-card-hover);
+  box-shadow: var(--shadow-card);
+}
+
+.hero-card {
+  min-height: 455px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 620px;
+  padding: 52px;
+}
+
+.hero-label {
+  display: block;
+  margin-bottom: 16px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-purple);
+}
+
+.hero-content h1 {
+  margin: 0;
+  font-size: clamp(42px, 5.5vw, 76px);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  color: var(--text-main);
+}
+
+.hero-content h2 {
+  margin: 16px 0 22px;
+  font-size: 30px;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  color: var(--text-muted);
+}
+
+.hero-content h2 span {
+  font-weight: 600;
+  color: var(--accent-purple);
+}
+
+.hero-description {
+  max-width: 500px;
+  margin-bottom: 36px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-width: 210px;
+  padding: 13px 24px;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background:
+    linear-gradient(var(--bg-card-hover), var(--bg-card-hover)) padding-box,
+    linear-gradient(90deg, var(--accent-purple), var(--accent-cyan)) border-box;
+  color: var(--text-main);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: var(--transition-base);
+}
+
+.hero-button svg {
+  font-size: 18px;
+  transition: transform 0.2s ease;
+}
+
+.about-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--text-muted);
+  transition: var(--transition-base);
+}
+
+/* ==========================================================================
+   4. HERO IMAGE (tarjeta oscura en ambos temas)
+   ========================================================================== */
+.hero-image-card {
+  min-height: 455px;
+  background: #05060c;
+  border-color: rgba(91, 108, 143, 0.28);
+
+  /* La tarjeta siempre es oscura (la esfera de partículas lo necesita), así que
+     fijamos aquí los colores de texto oscuros. Antes, en modo claro, el texto
+     heredaba grises oscuros y quedaba ilegible sobre el fondo negro. */
+  --text-muted: #97a4bd;
+  --text-dim: #8493ad;
+  --border-card-hover: rgba(168, 85, 247, 0.5);
+}
+
+body.lightmode .hero-image-card {
+  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.12),
+              0 18px 40px -14px rgba(5, 6, 12, 0.45);
+}
+
+.hero-image-content {
+  position: relative;
+  z-index: 3;
+  padding: 45px;
+  pointer-events: none; /* no bloquea el arrastre de la esfera */
+}
+
+.hero-image-icon {
+  margin-bottom: 36px;
+  font-size: 32px;
+  color: var(--text-dim);
+}
+
+.hero-code-text {
+  display: flex;
+  flex-direction: column;
+  font-family: monospace;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.hero-code-text span:last-child {
+  margin-top: 4px;
+  color: var(--text-dim);
+}
+
+/* Planeta estático (imagen) */
+.hero-planet {
+  position: absolute;
+  right: -40%;
+  bottom: -50%;
+  width: 135%;
+  max-width: none;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 0 30px var(--glow-purple));
+  transition: transform 0.5s ease;
+}
+
+/* Planeta 3D interactivo (esfera de partículas) */
+.hero-planet-container {
+  position: absolute;
+  right: -30%;
+  bottom: -40%;
+  width: 125%;
+  height: 125%;
+  max-width: none;
+  z-index: 2;
+
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  filter: drop-shadow(0 0 28px rgba(120, 64, 179, 0.3));
+  transition: transform 0.5s ease;
+}
+
+.hero-planet-container.is-grabbing {
+  cursor: grabbing;
+}
+
+.hero-planet-container canvas {
+  cursor: inherit;
+  touch-action: none;
+  outline: none;
+}
+
+.hero-image-card:hover .hero-planet,
+.hero-image-card:hover .hero-planet-container {
+  transform: scale(1.03) translateY(-4px);
+}
+
+/* ==========================================================================
+   5. TARJETAS INFERIORES (SKILLS, PROYECTOS, CONTACTO)
+   ========================================================================== */
+.home-card {
+  min-height: 365px;
+  padding: 32px 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  font-size: 22px;
+}
+
+.card-icon.purple {
+  color: var(--accent-purple);
+  background: var(--icon-purple-bg);
+  border: 1px solid var(--icon-purple-border);
+}
+
+.card-icon.cyan {
+  color: var(--accent-cyan);
+  background: var(--icon-cyan-bg);
+  border: 1px solid var(--icon-cyan-border);
+}
+
+.home-card h2 {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-main);
+}
+
+.card-description {
+  margin: 6px 0 24px;
+  font-size: 14.5px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+/* Habilidades */
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.skill-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 18px;
+  border: 1px solid var(--border-card);
+  border-radius: 999px;
+  background: var(--bg-item-subtle); /* antes rgba blanco: invisible en claro */
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition-base);
+}
+
+.skill-badge:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-purple);
+  background: var(--icon-purple-bg);
+  color: var(--text-main);
+}
+
+/* Proyectos */
+.featured-projects {
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+}
+
+.featured-project {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border-card);
+  border-radius: 8px;
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition-base);
+}
+
+.featured-project:last-child {
+  border-bottom: none;
+}
+
+.featured-project h3 {
+  margin: 0 0 2px;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+.featured-project span {
+  font-size: 12.5px;
+  color: var(--text-dim);
+}
+
+.featured-project svg {
+  font-size: 16px;
+  color: var(--text-dim);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+/* Contacto */
+.contact-preview-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: auto;
+  font-weight: 400;
+}
+
+.contact-preview-list a {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-decoration: none;
+  color: var(--text-muted);
+  transition: var(--transition-base);
+}
+
+.contact-preview-list a svg {
+  flex-shrink: 0;
+  font-size: 20px;
+  color: var(--text-dim);
+  transition: color 0.2s ease;
+}
+
+.contact-preview-list a span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   6. HOVER Y FOCO
+   ========================================================================== */
+.hero-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-button);
+}
+
+.hero-button:hover svg,
+.about-link:hover svg {
+  transform: translateX(3px);
+}
+
+.about-link:hover {
+  color: var(--text-main);
+}
+
+.featured-project:hover,
+.contact-preview-list a:hover {
+  background: var(--bg-item-subtle);
+  transform: translateX(4px);
+}
+
+.featured-project:hover svg {
+  color: var(--accent-purple);
+  transform: translateX(2px);
+}
+
+.contact-preview-list a:hover {
+  color: var(--text-main);
+}
+
+.contact-preview-list a:hover svg {
+  color: var(--accent-cyan);
+}
+
+a:focus-visible,
+button:focus-visible,
+.skill-badge:focus-visible {
+  outline: 2px solid var(--accent-purple);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* ==========================================================================
+   7. RESPONSIVE
+   ========================================================================== */
+@media (max-width: 1100px) {
+  .home {
+    width: min(100% - 40px, 1000px);
+  }
+
+  .home-top-grid,
+  .home-bottom-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-image-card {
+    min-height: 400px;
+  }
+
+  .hero-planet {
+    right: -35%;
+    bottom: -30%;
+    width: 130%;
+  }
+}
+
+@media (max-width: 700px) {
+  .home {
+    width: calc(100% - 24px);
+    padding-top: 12px;
+  }
+
+  .hero-content {
+    padding: 34px 24px;
+  }
+
+  .hero-card,
+  .hero-image-card {
+    min-height: auto;
+  }
+
+  .hero-content h1 {
+    font-size: 38px;
+  }
+
+  .hero-content h2 {
+    font-size: 22px;
+  }
+
+  .hero-description {
+    font-size: 15px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+  }
+
+  .hero-button {
+    width: 100%;
+  }
+
+  .hero-image-content {
+    padding: 28px;
+  }
+
+  .hero-planet {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+    margin-top: -20px;
+    transform: translateX(10%);
+  }
+
+  .home-card {
+    padding: 24px;
+    min-height: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-planet,
+  .hero-planet-container {
+    transition: none;
+  }
+
+  .hero-image-card:hover .hero-planet,
+  .hero-image-card:hover .hero-planet-container,
+  .skill-badge:hover,
+  .hero-button:hover,
+  .featured-project:hover,
+  .contact-preview-list a:hover {
+    transform: none;
+  }
+}

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="/src/assets/iconos/icono_principal/ico1_01_13 a.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Felipe | Portfolio</title>
+  </head>
+  <body class="darkmode">
+    <!-- Script para detectar el tema guardado antes de renderizar la app -->
+    <script>
+      (function () {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "light") {
+          document.body.classList.remove("darkmode");
+          document.body.classList.add("lightmode");
+        } else {
+          document.body.classList.add("darkmode");
+        }
+      })();
+    </script>
+
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

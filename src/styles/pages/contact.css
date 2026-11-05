@@ -1,0 +1,348 @@
+/* ==========================================================================
+   SECCIÓN DE CONTACTO (Alineada al Navbar)
+   ========================================================================== */
+.contactSection {
+  width: min(1425px, calc(100% - 80px));
+  margin: 0 auto;
+  padding: 60px 0 100px;
+  color: #e2e8f0;
+}
+
+.contactGrid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 28px;
+  align-items: stretch;
+}
+
+/* Tarjetas principales de la sección */
+.contactCard {
+  background: rgba(13, 18, 30, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 36px;
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================================================
+   COLUMNA IZQUIERDA (ContactInfo)
+   ========================================================================== */
+.sectionBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #38bdf8;
+  margin-bottom: 20px;
+}
+
+.badgeLine {
+  width: 18px;
+  height: 2px;
+  background-color: #38bdf8;
+  border-radius: 2px;
+}
+
+.contactTitle {
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1.05;
+  color: #ffffff;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+
+.gradientText {
+  background: linear-gradient(135deg, #a855f7 0%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.contactDescription {
+  color: #94a3b8;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  font-weight: 400;
+}
+
+/* Lista de ítems */
+.contactItemsList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: auto;
+}
+
+.contactItemCard {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 16px 20px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.contactItemCard:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateX(4px);
+}
+
+.contactItemIcon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contactItemIcon.purple {
+  background: rgba(168, 85, 247, 0.12);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  color: #c084fc;
+}
+
+.contactItemIcon.cyan {
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  color: #38bdf8;
+}
+
+.contactItemDetails {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.contactItemTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+.contactItemValue {
+  font-size: 13px;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+.contactItemArrow {
+  color: #64748b;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.contactItemCard:hover .contactItemArrow {
+  color: #f8fafc;
+  transform: translateX(3px);
+}
+
+/* ==========================================================================
+   COLUMNA DERECHA (ContactForm)
+   ========================================================================== */
+.formBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #a855f7;
+  margin-bottom: 16px;
+}
+
+.formTitle {
+  font-size: 26px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+}
+
+.formSubtitle {
+  font-size: 14px;
+  color: #94a3b8;
+  margin-bottom: 32px;
+  font-weight: 400;
+}
+
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputGroup label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #94a3b8;
+}
+
+.inputGroup input,
+.inputGroup textarea {
+  background: rgba(10, 15, 26, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: #f8fafc;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.inputGroup input::placeholder,
+.inputGroup textarea::placeholder {
+  color: #475569;
+}
+
+.inputGroup input:focus,
+.inputGroup textarea:focus {
+  border-color: #a855f7;
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.2);
+}
+
+.inputGroup textarea {
+  resize: vertical;
+}
+
+/* Botón con degradado neón */
+.submitBtn {
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  
+  /* Técnica de borde en degradado neón */
+  background: linear-gradient(#0b0f19, #0b0f19) padding-box,
+              linear-gradient(135deg, #a855f7, #38bdf8) border-box;
+  border: 1.5px solid transparent;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.25);
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+.submitBtn:hover {
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.4);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 1100px) {
+  .contactSection {
+    width: min(100% - 40px, 1000px);
+  }
+
+  .contactGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .contactSection {
+    width: calc(100% - 24px);
+  }
+
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+
+  .contactTitle {
+    font-size: 38px;
+  }
+}
+
+/* Tarjetas de contacto */
+body.lightmode .contactCard {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+  box-shadow: var(--card-shadow);
+}
+
+body.lightmode .contactTitle,
+body.lightmode .formTitle {
+  color: var(--text-primary);
+}
+
+body.lightmode .contactDescription,
+body.lightmode .formSubtitle {
+  color: var(--text-secondary);
+}
+
+/* Items de contacto a la izquierda */
+body.lightmode .contactItemCard {
+  background: var(--bg-badge);
+  border-color: var(--border-color);
+}
+
+body.lightmode .contactItemCard:hover {
+  background: rgba(241, 245, 249, 1);
+  border-color: var(--border-hover);
+}
+
+body.lightmode .contactItemTitle {
+  color: var(--text-primary);
+}
+
+/* Campos de texto (Inputs & Textarea) */
+body.lightmode .inputGroup label {
+  color: var(--text-secondary);
+}
+
+body.lightmode .inputGroup input,
+body.lightmode .inputGroup textarea {
+  background: var(--bg-input);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+body.lightmode .inputGroup input::placeholder,
+body.lightmode .inputGroup textarea::placeholder {
+  color: #94a3b8;
+}
+
+body.lightmode .inputGroup input:focus,
+body.lightmode .inputGroup textarea:focus {
+  border-color: var(--accent-purple);
+  box-shadow: 0 0 12px var(--glow-purple);
+}
+
+/* Botón de envío neón en modo claro */
+body.lightmode .submitBtn {
+  background: linear-gradient(#ffffff, #ffffff) padding-box,
+              linear-gradient(135deg, var(--accent-purple), var(--accent-cyan)) border-box;
+  color: var(--text-primary);
+  box-shadow: 0 4px 20px var(--glow-purple);
+}
+
+body.lightmode .submitBtn:hover {
+  box-shadow: 0 6px 25px var(--glow-cyan);
+}

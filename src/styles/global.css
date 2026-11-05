@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import "./pages/home.css";
+
+/* ==========================================================================
+   VARIABLES DE TEMA
+   ========================================================================== */
+:root,
+body.darkmode {
+  --bg-main: #0a0f1d;
+  --bg-card: rgba(13, 18, 30, 0.75);
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+  --border-color: rgba(255, 255, 255, 0.08);
+}
+
+body.lightmode {
+  --bg-main: #f8fafc;
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --border-color: rgba(15, 23, 42, 0.1);
+}
+
+/* ==========================================================================
+   RESET Y APLICACIÓN DE FONDO GLOBAL
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-border-box;
+}
+
+/* Aplicar la variable de fondo a html, body y al div #root */
+html,
+body,
+#root {
+  min-height: 100vh;
+  background-color: var(--bg-main) !important;
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #080c14;
+  color: #f4f7ff;
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+main {
+  padding-top: 90px; /* Compensación por la altura fija del navbar */
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+

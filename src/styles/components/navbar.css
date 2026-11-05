@@ -1,0 +1,323 @@
+/* ==========================================================================
+   FIXED NAVBAR & GLASSMORPHISM BASE
+   ========================================================================== */
+
+.navbarHeader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: transparent;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  border-bottom: 1px solid transparent;
+  transition: background 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbarHeader.scrolled {
+  background: rgba(10, 15, 26, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+.navbarContainer {
+  width: min(1425px, calc(100% - 80px));
+  margin: 0 auto;
+  padding: 24px 0;
+  transition: padding 0.3s ease;
+}
+
+.navbarHeader.scrolled .navbarContainer {
+  padding: 16px 0;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbarLogo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.logoIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background: rgba(168, 85, 247, 0.12);
+  color: #a855f7;
+  border-radius: 10px;
+  font-family: monospace;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.logoText {
+  color: #f4f6ff;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* ==========================================================================
+   DESKTOP NAVIGATION
+   ========================================================================== */
+
+.desktopNavGroup {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.navbarLinks {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.slidingIndicator {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  background-color: #a855f7;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #a855f7;
+  pointer-events: none;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.2s ease;
+  will-change: transform;
+}
+
+.navLink {
+  color: #97a4bd;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  padding-bottom: 6px;
+
+  &:hover,
+  &.active {
+    color: #f4f6ff;
+  }
+}
+
+/* ==========================================================================
+   MOBILE CONTROLS & DROPDOWN MENU
+   ========================================================================== */
+
+.mobileControls {
+  display: none;
+  align-items: center;
+  gap: 12px;
+}
+
+.mobileMenuBtn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  &:hover,
+  &.open {
+    background: rgba(168, 85, 247, 0.15);
+    border-color: #a855f7;
+    color: #c084fc;
+    box-shadow: 0 0 12px rgba(168, 85, 247, 0.2);
+  }
+}
+
+/* Backdrop translúcido al abrir el menú */
+.mobileBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(5, 8, 15, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 998;
+}
+
+/* Menú flotante */
+.mobileDropdown {
+  position: absolute;
+  top: 100%;
+  left: 16px;
+  right: 16px;
+  z-index: 999;
+  transform-origin: top center;
+  background: rgba(13, 18, 30, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6),
+              0 0 0 1px rgba(168, 85, 247, 0.15);
+  margin-top: 8px;
+  overflow: hidden;
+}
+
+.mobileLinksList {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  gap: 6px;
+}
+
+.mobileNavLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 12px 16px;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+
+  &:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  &.active {
+    color: #ffffff;
+    background: rgba(168, 85, 247, 0.12);
+    border-color: rgba(168, 85, 247, 0.25);
+    font-weight: 600;
+
+    .activeIndicatorDot {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+.activeIndicatorDot {
+  width: 6px;
+  height: 6px;
+  background-color: #a855f7;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #a855f7;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.2s ease;
+}
+
+/* ==========================================================================
+   MODO CLARO (LIGHT MODE)
+   ========================================================================== */
+
+body.lightmode .navbarHeader.scrolled {
+  background: rgba(255, 255, 255, 0.85);
+  border-bottom-color: rgba(15, 23, 42, 0.08);
+  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.06);
+}
+
+body.lightmode .logoText {
+  color: var(--text-primary, #0f172a);
+}
+
+body.lightmode .navLink {
+  color: var(--text-secondary, #475569);
+
+  &:hover,
+  &.active {
+    color: var(--text-primary, #0f172a);
+  }
+}
+
+body.lightmode .mobileMenuBtn {
+  background: rgba(15, 23, 42, 0.04);
+  border-color: rgba(15, 23, 42, 0.1);
+  color: #0f172a;
+
+  &:hover,
+  &.open {
+    background: rgba(147, 51, 234, 0.1);
+    border-color: #9333ea;
+    color: #9333ea;
+  }
+}
+
+body.lightmode .mobileBackdrop {
+  background: rgba(15, 23, 42, 0.3);
+}
+
+body.lightmode .mobileDropdown {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(15, 23, 42, 0.08);
+  box-shadow: 0 20px 35px -10px rgba(15, 23, 42, 0.12),
+              0 0 0 1px rgba(147, 51, 234, 0.1);
+}
+
+body.lightmode .mobileNavLink {
+  color: #475569;
+
+  &:hover {
+    color: #0f172a;
+    background: rgba(15, 23, 42, 0.04);
+  }
+
+  &.active {
+    color: #0f172a;
+    background: rgba(147, 51, 234, 0.08);
+    border-color: rgba(147, 51, 234, 0.2);
+
+    .activeIndicatorDot {
+      background-color: #9333ea;
+      box-shadow: 0 0 8px #9333ea;
+    }
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+
+@media (max-width: 1100px) {
+  .navbarContainer {
+    width: min(100% - 40px, 1000px);
+  }
+}
+
+@media (max-width: 768px) {
+  .desktopNavGroup {
+    display: none;
+  }
+
+  .mobileControls {
+    display: flex;
+  }
+
+  .navbarContainer {
+    width: calc(100% - 32px);
+    padding: 16px 0;
+  }
+
+  .navbarHeader.scrolled .navbarContainer {
+    padding: 12px 0;
+  }
+}

@@ -1,0 +1,513 @@
+/* ==========================================================================
+   1. DESIGN TOKENS
+   ========================================================================== */
+:root {
+  --proj-max-width: 1425px;
+
+  --proj-bg-card: #121318;
+  --proj-border-card: rgba(255, 255, 255, 0.08);
+  --proj-text-title: #f3f4f6;
+  --proj-text-desc: #9ca3af;
+
+  --proj-purple-main: #a855f7;
+  --proj-purple-light: #c084fc;
+  --proj-cyan-main: #06b6d4;
+  --proj-cyan-light: #22d3ee;
+  --proj-emerald-main: #10b981;
+  --proj-emerald-light: #34d399;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.lightmode {
+  --proj-bg-card: #ffffff;
+  --proj-border-card: rgba(15, 23, 42, 0.09);
+  --proj-text-title: #0f172a;
+  --proj-text-desc: #475569;
+
+  --proj-purple-main: #9333ea;
+  --proj-purple-light: #7e22ce;
+  --proj-cyan-main: #0284c7;
+}
+
+/* ==========================================================================
+   2. SECCIÓN Y ENCABEZADO
+   ========================================================================== */
+.projectsSection {
+  width: min(var(--proj-max-width), calc(100% - 48px));
+  margin: 0 auto;
+  padding: 60px 0 100px;
+  color: #e2e8f0;
+}
+
+body.lightmode .projectsSection {
+  color: #1e293b;
+}
+
+.projectsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+  margin-bottom: 48px;
+}
+
+.headerLeft {
+  max-width: 520px;
+}
+
+.sectionBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--proj-cyan-main);
+}
+
+body.lightmode .sectionBadge {
+  color: var(--proj-purple-main);
+}
+
+.badgeLine {
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background-color: currentColor;
+}
+
+.projectsTitle {
+  margin-bottom: 20px;
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--proj-text-title);
+}
+
+.gradientText {
+  background: linear-gradient(135deg, var(--proj-purple-main) 0%, var(--proj-cyan-main) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.projectsDescription {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--proj-text-desc);
+}
+
+/* ==========================================================================
+   3. FILTROS
+   ========================================================================== */
+.filterContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px;
+  border-radius: 30px;
+  background: rgba(15, 23, 42, 0.4);
+}
+
+.filterBtn {
+  padding: 8px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.filterBtn:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.filterBtn.active {
+  color: #ffffff;
+  background: rgba(168, 85, 247, 0.12);
+  border-color: var(--proj-purple-main);
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.25);
+}
+
+/* Filtros: modo claro */
+body.lightmode .filterContainer {
+  padding: 4px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.04);
+}
+
+body.lightmode .filterBtn {
+  border: none;
+  border-radius: 8px;
+  color: var(--proj-text-desc);
+}
+
+body.lightmode .filterBtn:hover {
+  color: var(--proj-text-title);
+  background: rgba(15, 23, 42, 0.05);
+}
+
+body.lightmode .filterBtn.active {
+  color: #ffffff;
+  background: var(--proj-purple-main);
+  box-shadow: 0 4px 12px rgba(147, 51, 234, 0.25);
+}
+
+/* ==========================================================================
+   4. GRILLA
+   ========================================================================== */
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.noProjects {
+  grid-column: 1 / -1;
+  padding: 60px 0;
+  text-align: center;
+  color: #64748b;
+}
+
+body.lightmode .noProjects {
+  padding: 40px;
+  border: 1px dashed rgba(15, 23, 42, 0.15);
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.02);
+  color: var(--proj-text-desc);
+}
+
+/* ==========================================================================
+   5. TARJETA (PROJECT CARD)
+   ========================================================================== */
+.projectCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  border: 1px solid var(--proj-border-card);
+  border-radius: 20px;
+  background: var(--proj-bg-card);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s var(--ease-out);
+}
+
+.projectCard:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.projectCard:focus-visible {
+  outline: 2px solid var(--proj-purple-main);
+  outline-offset: 2px;
+}
+
+/* Glow según color de acento (Dark Mode) */
+.projectCard.purple:hover  { box-shadow: 0 20px 40px -15px rgba(168, 85, 247, 0.22); }
+.projectCard.cyan:hover    { box-shadow: 0 20px 40px -15px rgba(6, 182, 212, 0.22); }
+.projectCard.emerald:hover { box-shadow: 0 20px 40px -15px rgba(16, 185, 129, 0.22); }
+
+/* Glow y sombras mejoradas para Light Mode (Tarjetas más luminosas) */
+body.lightmode .projectCard {
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.06), 0 0 1px 1px rgba(15, 23, 42, 0.02);
+}
+
+body.lightmode .projectCard:hover {
+  border-color: rgba(147, 51, 234, 0.3);
+}
+
+body.lightmode .projectCard.purple:hover { 
+  box-shadow: 0 20px 40px -12px rgba(147, 51, 234, 0.22), 0 0 0 2px rgba(147, 51, 234, 0.12); 
+}
+
+body.lightmode .projectCard.cyan:hover { 
+  box-shadow: 0 20px 40px -12px rgba(2, 132, 199, 0.22), 0 0 0 2px rgba(2, 132, 199, 0.12); 
+}
+
+body.lightmode .projectCard.emerald:hover { 
+  box-shadow: 0 20px 40px -12px rgba(16, 185, 129, 0.22), 0 0 0 2px rgba(16, 185, 129, 0.12); 
+}
+
+/* Barra de acento (borde superior) */
+.cardAccentBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 10;
+  opacity: 0.85;
+  transition: opacity 0.3s ease;
+}
+
+.cardAccentBar.purple  { background: linear-gradient(90deg, var(--proj-purple-main), var(--proj-purple-light)); }
+.cardAccentBar.cyan    { background: linear-gradient(90deg, var(--proj-cyan-main), var(--proj-cyan-light)); }
+.cardAccentBar.emerald { background: linear-gradient(90deg, var(--proj-emerald-main), var(--proj-emerald-light)); }
+
+/* ==========================================================================
+   6. IMAGEN E ÍCONO FLOTANTE
+   ========================================================================== */
+.projectImageContainer {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: #090a0f;
+}
+
+body.lightmode .projectImageContainer {
+  background: #f1f5f9;
+}
+
+.projectImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s var(--ease-out);
+}
+
+.projectCard:hover .projectImage {
+  transform: scale(1.06);
+}
+
+.projectImageOverlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(18, 19, 24, 0.2) 0%, rgba(18, 19, 24, 0.75) 100%);
+}
+
+body.lightmode .projectImageOverlay {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 0%, rgba(15, 23, 42, 0.35) 100%);
+}
+
+.iconBox {
+  position: absolute;
+  bottom: 14px;
+  left: 18px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  transition: transform 0.3s ease;
+}
+
+.projectCard:hover .iconBox {
+  transform: translateY(-2px);
+}
+
+.iconBox.purple  { background: rgba(168, 85, 247, 0.2); color: var(--proj-purple-light); }
+.iconBox.cyan    { background: rgba(6, 182, 212, 0.2);  color: var(--proj-cyan-light); }
+.iconBox.emerald { background: rgba(16, 185, 129, 0.2); color: var(--proj-emerald-light); }
+
+body.lightmode .iconBox {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(15, 23, 42, 0.08);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+body.lightmode .iconBox.purple  { color: var(--proj-purple-main); }
+body.lightmode .iconBox.cyan    { color: var(--proj-cyan-main); }
+body.lightmode .iconBox.emerald { color: var(--proj-emerald-main); }
+
+/* ==========================================================================
+   7. CUERPO DE LA TARJETA
+   ========================================================================== */
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 20px 22px 16px;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--proj-text-title);
+}
+
+.cardDescription {
+  margin: 0 0 18px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--proj-text-desc);
+  font-weight: 400;
+}
+
+/* Botón de enlace externo */
+.externalLinkBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--proj-text-desc);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.externalLinkBtn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+  transform: translate(2px, -2px);
+}
+
+body.lightmode .externalLinkBtn {
+  background: rgba(15, 23, 42, 0.04);
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+body.lightmode .externalLinkBtn:hover {
+  color: var(--proj-purple-main);
+  background: rgba(147, 51, 234, 0.08);
+  transform: translate(2px, -2px);
+}
+
+/* Tags */
+.tagsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.tagBadge {
+  padding: 4px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--proj-text-desc);
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.projectCard:hover .tagBadge {
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+body.lightmode .tagBadge {
+  background: rgba(15, 23, 42, 0.03);
+  border-color: rgba(15, 23, 42, 0.08);
+  color: #475569;
+}
+
+body.lightmode .projectCard:hover .tagBadge {
+  border-color: rgba(147, 51, 234, 0.2);
+}
+
+/* ==========================================================================
+   8. FOOTER ("VER DETALLES")
+   ========================================================================== */
+.cardFooter {
+  padding: 12px 22px 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+body.lightmode .cardFooter {
+  border-top-color: rgba(15, 23, 42, 0.05);
+}
+
+.viewProjectLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.viewProjectLink.purple  { color: var(--proj-purple-light); }
+.viewProjectLink.cyan    { color: var(--proj-cyan-light); }
+.viewProjectLink.emerald { color: var(--proj-emerald-light); }
+
+body.lightmode .viewProjectLink.purple  { color: var(--proj-purple-main); }
+body.lightmode .viewProjectLink.cyan    { color: var(--proj-cyan-main); }
+body.lightmode .viewProjectLink.emerald { color: var(--proj-emerald-main); }
+
+.arrowIcon {
+  transition: transform 0.25s var(--ease-out);
+}
+
+.projectCard:hover .arrowIcon {
+  transform: translateX(5px);
+}
+
+/* ==========================================================================
+   9. RESPONSIVE
+   ========================================================================== */
+@media (max-width: 1100px) {
+  .projectsSection {
+    width: min(100% - 40px, 1000px);
+  }
+
+  .projectsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .projectsHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 680px) {
+  .projectsSection {
+    width: calc(100% - 32px);
+  }
+
+  .projectsGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .projectsTitle {
+    font-size: 38px;
+  }
+
+  .filterContainer {
+    flex-wrap: wrap;
+  }
+
+  .projectImageContainer {
+    height: 180px;
+  }
+
+  .cardTitle {
+    font-size: 1.15rem;
+  }
+}
+
